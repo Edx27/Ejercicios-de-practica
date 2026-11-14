@@ -7,8 +7,8 @@ class Estudiante:
     NOTA_MAX = 5.0
 
     def __init__(self, nombre: str):
-        self.__nombre = nombre      # Atributo privado
-        self.__notas = []           # Atributo privado (lista)
+        self.__nombre = nombre      
+        self.__notas = []           
 
     @property
     def nombre(self) -> str:
@@ -16,11 +16,11 @@ class Estudiante:
 
     @property
     def notas(self) -> list:
-        # Retorna una copia para evitar mutabilidad no deseada desde afuera
+        
         return self.__notas.copy()
 
     def agregar_nota(self, nota: float) -> None:
-        # Validación: no se permiten valores negativos ni superiores a 5.0
+        
         if self.NOTA_MIN <= nota <= self.NOTA_MAX:
             self.__notas.append(nota)
         else:
@@ -43,17 +43,17 @@ class TarjetaCredito:
         self.titular = titular
 
     def calcular_cashback(self, monto: float) -> float:
-        return 0.0                  # Base: sin cashback
+        return 0.0                  
 
 
 class TarjetaGold(TarjetaCredito):
     def calcular_cashback(self, monto: float) -> float:
-        return monto * 0.02         # 2 %
+        return monto * 0.02         
 
 
 class TarjetaBlack(TarjetaCredito):
     def calcular_cashback(self, monto: float) -> float:
-        return monto * 0.05         # 5 %
+        return monto * 0.05         
 
 
 
@@ -71,11 +71,11 @@ if __name__ == "__main__":
         except ValueError as e:
             print("Error:", e)
 
-    est.notas.append(1.0)           # Modifica solo la copia
+    est.notas.append(1.0)           
     print("Notas tras intento externo:", est.notas)
 
     print("\n=== Ejercicio 2 ===")
     tarjetas = [TarjetaCredito("Ana"), TarjetaGold("Luis"), TarjetaBlack("Marta")]
     compra = 1000.0
-    for t in tarjetas:              # Invocación polimórfica
+    for t in tarjetas:              
         print(f"{type(t).__name__:15} -> cashback: ${t.calcular_cashback(compra):.2f}")
